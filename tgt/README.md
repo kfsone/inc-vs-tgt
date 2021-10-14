@@ -28,7 +28,7 @@ library targets
 # Usage
 
 ```ps1
-	cmake -G Ninja -B build.dir
+	cmake -B build.dir
 	cmake --build build.dir --clean-first -j9
 	./build.dir/product
 ```

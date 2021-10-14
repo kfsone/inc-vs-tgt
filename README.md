@@ -23,21 +23,3 @@ nuances that I don't engage: pure INTERFACE targets, IMPORTED targets, etc.
 Each project contains it's own README.md along with syntax for building and running the
 project.
 
-In each case, I'm assumed you will use Ninja as the generator (now present as a core build tool
-on most OSes: Linux, Mac, Windows) and do compilation in a subdirectory called `build.dir`.
-
-```ps1
-	cmake
-		-G Ninja           # specify the Ninja generator
-		-B build.dir       # specify the working directory for builds
-```
-
-and then I use `cmake` to invoke the build tools so as to make the commands platform-independent.
-
-```ps1
-	cmake
-		--build build.dir  # tells cmake to perform the build configured in build.dir
-		--clean-first      # force a `clean` first
-		-j9	               # specifies parallelism of 9 workers
-```
-
