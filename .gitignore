@@ -1,0 +1,15 @@
+.vs
+.vscode
+.idea
+*~
+build
+build.dir
+out
+tmp
+*.o
+*.a
+*.la
+*.so
+*.lib
+*.dll
+*.tmp

@@ -1,0 +1,22 @@
+ADD_LIBRARY(
+	lib1
+
+	EXCLUDE_FROM_ALL
+
+	lib1.cpp
+)
+
+TARGET_COMPILE_DEFINITIONS(
+	lib1
+
+	# Don't add the /X or -X prefix, it's added for you platform-correctly
+	PUBLIC LIB1
+)
+
+TARGET_INCLUDE_DIRECTORIES(
+	lib1
+
+	PUBLIC
+
+	${CMAKE_SOURCE_DIR}/includes/lib1
+)
