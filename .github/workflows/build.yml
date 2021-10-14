@@ -1,0 +1,45 @@
+name: build
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally
+    # well on Windows or Mac.  You can convert this to a matrix build if you need
+    # cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Configure inc
+      working-directory: inc
+      run: |
+        cmake -B ${{github.workspace}}/inc/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build inc
+      # Build your program with the given configuration
+      working-directory: inc
+      run: |
+        cmake --build ${{github.workspace}}/inc/build --config ${{env.BUILD_TYPE}}
+
+    - name: Configure tgt
+      working-directory: tgt
+      run: |
+        cmake -B ${{github.workspace}}/tgt/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build tgt
+      # Build your program with the given configuration
+      working-directory: tgt
+      run: |
+        cmake --build ${{github.workspace}}/tgt/build --config ${{env.BUILD_TYPE}}
+
