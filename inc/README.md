@@ -12,3 +12,15 @@ to use the variables in the right places.
 	cmake --build build.dir --clean-first -j9
 	./build.dir/product
 ```
+
+
+# Risks
+
+In this particular incarnation, the libraries both depend on the consumers to ensure that the
+compiler flags are set for them.
+
+For instance, `lib1.cpp` will not emit any code if `LIB1` is not defined when it compiles.
+
+This only works here because the main `CMakeLists.txt` shoves the defines we provide in
+`LIB1_CXX_FLAGS` into the global `CMAKE_CXX_FLAGS` variable. However, that means that `lib2.cpp`
+is also compiled with this flag...
